@@ -21,6 +21,11 @@ function convert_textile(t) {
   var trstyle = /^\{(\S+)\}\.\s*\|/;
   
   function convert(t) {
+    var re = new RegExp('(.*)\n([^#\*\n].*)','g');
+    t = t.replace(re,'$1<br />$2');
+    re = new RegExp('\n<br />','g');
+    t = t.replace(re,'\n\n');
+
   	var lines = t.split(/\r?\n/);
   	html="";
   	inpr=inbq=inbqq=0;
