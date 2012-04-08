@@ -40,8 +40,8 @@ function convert_textile(t) {
   		if(mm=para.exec(lines[i])){stp(1);inpr=1;html += lines[i].replace(para,"<p"+make_attr(mm[1])+">"+prep(mm[2]));continue;}
   		if(mm = /^h(\d)(\S*)\.\s*(.*)/.exec(lines[i])){stp(1);html += tag("h"+mm[1],make_attr(mm[2]),prep(mm[3]))+le;continue;}
   		if(mm=rfn.exec(lines[i])){stp(1);inpr=1;html+=lines[i].replace(rfn,'<p id="fn'+mm[1]+'"><sup>'+mm[1]+'<\/sup>'+prep(mm[2]));continue;}
-  		if (lines[i].indexOf("*") == 0) {lst="<ul>";elst="<\/ul>";}
-  		else if (lines[i].indexOf("#") == 0) {lst="<\ol>";elst="<\/ol>";}
+  		if (lines[i].match(/^\*+ /)) {lst="<ul>";elst="<\/ul>";}
+  		else if (lines[i].match(/^\#+ /)) {lst="<\ol>";elst="<\/ol>";}
   		else {while (lstlev > 0) {html += elst;if(lstlev > 1){html += "<\/li>";}else{html+="\n";}html+="\n";lstlev--;}lst="";}
   		if(lst) {
   			stp(1);
